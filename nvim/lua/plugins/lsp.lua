@@ -2,17 +2,9 @@ require("mason").setup()
 
 require("mason-lspconfig").setup({
   ensure_installed = {
-    "bashls",
     "clangd",
-    "cssls",
-    "html",
     "jdtls",
-    "jsonls",
     "lua_ls",
-    "pyright",
-    "sqlls",
-    "tsserver",
-    "vimls"
   }
 })
 

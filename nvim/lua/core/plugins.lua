@@ -45,36 +45,36 @@ return {
   --},
   
   -- better file explorer
-  {
-    "justinmk/vim-dirvish",
-    keys = "-",
-    cmd = "Dirvish",
-    init = function()
-      -- check if a file argument supplied is a directory
-      local argv_contains_dir = false
-      for k, v in pairs(vim.fn.argv()) do
-        if vim.fn.isdirectory(v) == 1 then
-          argv_contains_dir = true
-        end
-      end
-      if vim.fn.argc() >= 1 and argv_contains_dir then
-        require("lazy").load({ plugins = { "vim-dirvish" } })
-      end
-      -- load dirvish when a directory is opened
-      vim.api.nvim_create_autocmd("BufNew", {
-        callback = function()
-          if require("lazy.core.config").plugins["vim-dirvish"]._.loaded then
-            return true
-          end
-
-          if vim.fn.isdirectory(vim.fn.expand("<afile>")) == 1 then
-            require("lazy").load({ plugins = { "vim-dirvish" } })
-            return true
-          end
-        end,
-      })
-    end
-  },
+  --{
+  --  "justinmk/vim-dirvish",
+  --  keys = "-",
+  --  cmd = "Dirvish",
+  --  init = function()
+  --    -- check if a file argument supplied is a directory
+  --    local argv_contains_dir = false
+  --    for k, v in pairs(vim.fn.argv()) do
+  --      if vim.fn.isdirectory(v) == 1 then
+  --        argv_contains_dir = true
+  --      end
+  --    end
+  --    if vim.fn.argc() >= 1 and argv_contains_dir then
+  --      require("lazy").load({ plugins = { "vim-dirvish" } })
+  ---    end
+  --    -- load dirvish when a directory is opened
+  --    vim.api.nvim_create_autocmd("BufNew", {
+  --      callback = function()
+  --        if require("lazy.core.config").plugins["vim-dirvish"]._.loaded then
+  --          return true
+  --        end
+--
+  --        if vim.fn.isdirectory(vim.fn.expand("<afile>")) == 1 then
+  --          require("lazy").load({ plugins = { "vim-dirvish" } })
+  ----          return true
+   --       end
+   --     end,
+  --    })
+   -- end
+ -- },
   -- unix helpers
   {
     "tpope/vim-eunuch",
@@ -99,22 +99,21 @@ return {
     }
   },
   --{ "tpope/vim-rsi", event = { "InsertEnter", "CmdlineEnter" } },
-  {
-    "echasnovski/mini.move",
-    keys = {
-      "<A-h>",
-      "<A-j>",
-      "<A-k>",
-      "<A-l>",
-      { "<A-h>", mode = "v" },
-      { "<A-j>", mode = "v" },
-      { "<A-k>", mode = "v" },
-      { "<A-l>", mode = "v" }
-    },
-    config = function()
-      require("mini.move").setup()
-    end
-  },
+  --{
+  --  "echasnovski/mini.move",
+  --  keys = {
+  --    "<A-h>",
+  --    "<A-j>",
+   ---   "<A-k>",
+  --    "<A-l>",
+  --    { "<A-h>", mode = "v" },
+  --    { "<A-j>", mode = "v" },
+  --    { "<A-k>", mode = "v" },
+  --    { "<A-l>", mode = "v" }
+  --  },
+  --  config = function()
+  ----  end
+  --},
   { "tpope/vim-unimpaired", keys = { "[", "]" } },
   
   -- better git integration
@@ -167,15 +166,16 @@ return {
       "GBrowse"
     }
   },
-  {
-    "tpope/vim-surround",
-    keys = { "ds", "cs", "ys", { "sa", "<Plug>VSurround", mode = "v" }, { "gS", mode = "v" } },
-    config = function()
-      -- remove vim-surround's visual mode mapping for S and use sa instead
-      vim.keymap.del("x", "S")
-    end
-  },
+  --{
+  --  "tpope/vim-surround",
+  --  keys = { "ds", "cs", "ys", { "sa", "<Plug>VSurround", mode = "v" }, { "gS", mode = "v" } },
+  ---  config = function()
+  --    -- remove vim-surround's visual mode mapping for S and use sa instead
+  --    vim.keymap.del("x", "S")
+  --  end
+  --},
   { "tpope/vim-repeat", event = "VeryLazy" },
+  
   -- git commit browser
   {
     "junegunn/gv.vim",
@@ -191,15 +191,15 @@ return {
     config = true,
   },
   -- indent guides
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    opts = {
-      show_current_context = true,
-      show_current_context_start = true,
-    }
-  },
+  --{
+  --  "lukas-reineke/indent-blankline.nvim",
+  --  event = { "BufReadPost", "BufNewFile" },
+  --  dependencies = { "nvim-treesitter/nvim-treesitter" },
+  --  opts = {
+  --    show_current_context = true,
+  --    show_current_context_start = true,
+  --  }
+  --},
   -- zen mode
   {
     "folke/zen-mode.nvim",
@@ -326,6 +326,7 @@ return {
     keys = { ":", mode = "i" },
     dependencies = "hrsh7th/nvim-cmp"
   },
+  
   {
     "L3MON4D3/LuaSnip",
     event = "InsertEnter",
@@ -477,25 +478,23 @@ return {
     end
   },
   -- improved movement
-  {
-    "ggandor/leap.nvim",
-    keys = {
-      { "s",  mode = { "n", "x", "o" } },
-      { "S",  mode = { "n", "x", "o" } },
-      { "gs", mode = { "n", "x", "o" } },
-    },
-    config = function()
-      require("leap").set_default_keymaps()
-    end
-  },
+  --{
+  --  "ggandor/leap.nvim",
+  --  keys = {
+  --    { "s",  mode = { "n", "x", "o" } },
+  --    { "S",  mode = { "n", "x", "o" } },
+  --    { "gs", mode = { "n", "x", "o" } },
+  --  },
+  --  config = function()
+  --    require("leap").set_default_keymaps()
+  --  end
+  --},
   {
     "wellle/targets.vim",
     event = "VeryLazy"
   },
-  {
-    "tpope/vim-sleuth",
-    event = { "BufReadPre", "BufNewFile" },
-  },
+  
+
   -- icons
   "nvim-tree/nvim-web-devicons",
 
@@ -516,40 +515,17 @@ return {
       vim.cmd("colorscheme miasma")
     end,
   },
-
-  -- markdown preview
-  {
-    "ellisonleao/glow.nvim",
-    cond = vim.fn.executable("glow") == 1,
-    ft = "markdown"
-  },
   
   -- NEW IMPLEMENTATIONS OF PLUGINS MIO YO MISMO  
       -- Bufferline
-      {
-        'akinsho/bufferline.nvim',
-        dependencies = {
-            'nvim-tree/nvim-web-devicons'
-        },
-    },
+      {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
 
-    {
-        "phaazon/hop.nvim",
-        lazy = true,
-    },
-
+    --Nvim tree
     {
         'nvim-tree/nvim-tree.lua',
         lazy = true,
         dependencies = {
             'nvim-tree/nvim-web-devicons',
         },
-    },
-
-    -- Which-key
-    {
-        'folke/which-key.nvim',
-        lazy = true,
-    },
-  
+    },  
 }

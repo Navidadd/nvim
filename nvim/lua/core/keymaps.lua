@@ -1,16 +1,17 @@
 -- keymaps
 
+local api = vim.api
 -- delete previous word in insert mode
-vim.keymap.set("i", "<C-BS>", "<C-W>")
+--vim.keymap.set("i", "<C-BS>", "<C-W>")
 -- unindent in insert mode
-vim.keymap.set("i", "<S-Tab>", "<C-d>")
+--vim.keymap.set("i", "<S-Tab>", "<C-d>")
 
 -- change directory
-vim.keymap.set('n', "<leader>cd", function()
-  vim.cmd(':cd ' .. vim.fn.expand("%:p:h"))
-  print(vim.fn.getcwd())
-end
-)
+--vim.keymap.set('n', "<leader>cd", function()
+--  vim.cmd(':cd ' .. vim.fn.expand("%:p:h"))
+--  print(vim.fn.getcwd())
+--end
+--)
 
 -- vanilla buffer switcher
 -- vim.keymap.set('n', '<leader>b', ':set nomore <Bar> echo "Open buffers:" <Bar> :buffers <Bar> :set more <CR>:b<Space>')
@@ -61,28 +62,10 @@ endfunction
 vnoremap <C-r> <Esc>:%s/<c-r>=GetVisual()<cr>//g<left><left>
 ]]
 
---NvimTree
-local is_nvim_tree_open = false
 
--- Función para alternar entre abrir y cerrar NvimTree
-local function toggle_nvim_tree()
-  if is_nvim_tree_open then
-    vim.cmd(":NvimTreeClose")
-    is_nvim_tree_open = false
-  else
-    vim.cmd(":NvimTreeOpen")
-    is_nvim_tree_open = true
-  end
-end
 
 -- Agregar keybinding para abrir o cerrar NvimTree con Ctrl+E
-vim.keymap.set("n", "<C-e>", toggle_nvim_tree)
-
--- buffer stuff
--- create a new buffer
-vim.keymap.set("n", "<leader>n", ":enew<CR>")
--- delete a buffer
-vim.keymap.set("n", "<leader>q", ":bd<CR>")
+vim.keymap.set("n", "<C-e>", ":NvimTreeToggle<CR>", { silent = true })
 
 -- switch tabs quickly
 vim.keymap.set("n", "<leader>1", "1gt<CR>")
@@ -115,3 +98,41 @@ vim.keymap.set({ 'n', 'v' }, '<leader>P', '"+P')
 -- don't lose selection when shifting text
 vim.keymap.set("x", "<", "<gv")
 vim.keymap.set("x", ">", ">gv")
+
+-- BUFFERS RELATED
+  vim.api.nvim_set_keymap("i", "<C-b>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true }) -- next buffer insert
+  vim.api.nvim_set_keymap("n", "<C-b>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true }) -- next buffer normal
+  --vim.api.nvim_set_keymap("i", "<C-b>l", ":buffers<CR>", { noremap = true, silent = true }) -- list buffers 
+
+  -- create a new buffer
+  --vim.keymap.set("", "<C-b>n", ":enew<CR>")
+  -- delete a buffer
+  --vim.keymap.set("i", "<C-b>d", ":BufferLinePickClose<CR>")
+  --vim.keymap.set("n", "<C-b>d", ":BufferLinePickClose<CR>")
+
+  -- Direstories
+
+
+-- Definir función para crear carpeta con path absoluto
+local function CreateFolderWithAbsolutePath()
+    -- Copiar el path absoluto al portapapeles usando la tecla gy
+    api.nvim_command([[normal! gy]])
+
+    -- Pedir al usuario el nombre de la carpeta
+    local folder_name = api.nvim_call_function("input", {"Enter folder name: "})
+
+    -- Obtener el contenido del portapapeles (que es el path absoluto copiado previamente)
+    local clipboard_content = api.nvim_call_function("getreg", {"+"})
+
+    -- Concatenar el nombre de la carpeta al path absoluto
+    local folder_path = clipboard_content .. "/" .. folder_name
+
+    -- Crear la carpeta usando el comando mkdir
+    api.nvim_call_function("mkdir", {folder_path, "p"})
+
+    -- Imprimir mensaje de éxito
+    print("Folder '" .. folder_name .. "' created at '" .. folder_path .. "'")
+end
+
+-- Mapear <leader>d a la función personalizada
+vim.keymap.set("n", "<leader>d", CreateFolderWithAbsolutePath, {noremap = true, silent = true})

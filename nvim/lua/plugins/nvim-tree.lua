@@ -12,6 +12,7 @@ end
 
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
+
 nvim_tree.setup {
   update_focused_file = {
     enable = true,
@@ -61,12 +62,8 @@ nvim_tree.setup {
     side = "left",
     mappings = {
       list = {
-        { key = "<C-e>", cb = tree_cb "last_sibling" }, -- Reemplaza "<C-e>" con tu combinación de teclas deseada
-        --{ key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-        --{ key = "h", cb = tree_cb "close_node" },
-        --{ key = "v", cb = tree_cb "vsplit" },
-        { key = "m", cb = tree_cb("create") },
-      },
+        --vim.keymap.set('n', 's', api.fs.create_dir, opts('Create Directory')) -- create directoty with "s"
     },
   },
+},
 }

@@ -2,6 +2,7 @@
 vim.opt.autoindent = true
 vim.opt.smartindent = false
 vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
 vim.cmd[[filetype indent on]]
 
 -- Navegación con CTRL+LEFT o CTRL+RIGHT en modo Insert
@@ -27,7 +28,6 @@ vim.opt.cursorline = true
 vim.opt.directory = vim.fn.stdpath("state") .. "/swap"
 -- disable annoying error bell
 vim.opt.errorbells = false
-vim.opt.expandtab = true
 vim.opt.formatoptions = "jcroqlnt"
 -- enable folding
 vim.opt.foldenable = false
@@ -68,7 +68,7 @@ vim.opt.smartcase = true
 -- put new windows right of the current
 vim.opt.splitright = true
 -- set tabs to two spaces
-vim.opt.tabstop = 2
+vim.opt.tabstop = 4
 -- true color support
 vim.opt.termguicolors = true
 -- show file in titlebar
@@ -99,12 +99,12 @@ vim.opt.selection = "exclusive"
 vim.opt.keymodel = "startsel,stopsel"
 vim.opt.selectmode = "key"
 
+-- CLIPBOARD
+vim.cmd("set clipboard=unnamedplus")
+
 if vim.fn.has("clipboard") then
   vim.opt.clipboard:append("unnamedplus")
 end
-
--- BUFFERS RELATED
-
 
 
 --globals
@@ -117,20 +117,20 @@ vim.g.did_load_filetypes = 0
 vim.g.mapleader = " "
 
 -- declare before indent-blankline is loaded
-vim.g.indent_blankline_filetype_exclude = {
-  "help",
-  "startify",
-  "dashboard",
-  "packer",
-  "neogitstatus",
-  "NvimTree",
-  "Trouble",
-  "WhichKey",
-  "lsp-installer",
-  "mason",
-  "text",
-  "sh"
-}
+--vim.g.indent_blankline_filetype_exclude = {
+--  "help",
+--  "startify",
+--  "dashboard",
+--  "packer",
+--  "neogitstatus",
+--  "NvimTree",
+--  "Trouble",
+--  "WhichKey",
+--  "lsp-installer",
+-- "mason",
+--  "text",
+--  "sh"
+--}
 
 vim.g["rainbow#pairs"] = { { "(", ")" }, { "[", "]" }, { "{", "}" } }
 

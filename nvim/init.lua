@@ -8,3 +8,7 @@ require("core.lazy")
 require("core.keymaps")
 --nvim-tree
 require('nvim-tree').setup()
+--bufferline
+vim.opt.termguicolors = true
+require("bufferline").setup{}
+
