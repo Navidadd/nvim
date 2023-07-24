@@ -1,2 +1,2 @@
 # nvim
-Personal Nvim configuration for Java 
+Personal Nvim configuration for Java Development
