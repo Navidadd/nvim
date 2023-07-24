@@ -79,9 +79,9 @@ vim.keymap.set("n", "<leader>8", "8gt<CR>")
 vim.keymap.set("n", "<leader>9", "9gt<CR>")
 
 -- open a tab
-vim.keymap.set("n", "<leader>t", ":tabnew<CR>")
+--vim.keymap.set("n", "<leader>t", ":tabnew<CR>")
 -- close a tab
-vim.keymap.set("n", "<leader>x", ":tabclose<CR>")
+--vim.keymap.set("n", "<leader>x", ":tabclose<CR>")
 
 -- Resize splits with ctrl + arrows
 --vim.keymap.set("n", "<C-Up>", ":resize +2<CR>")
@@ -90,10 +90,10 @@ vim.keymap.set("n", "<leader>x", ":tabclose<CR>")
 --vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>")
 
 -- easier copying and pasteing into clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
-vim.keymap.set({ "n", "v" }, "<leader>d", '"+d')
-vim.keymap.set({ "n", "v" }, "<leader>p", '"+p')
-vim.keymap.set({ 'n', 'v' }, '<leader>P', '"+P')
+--vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
+--vim.keymap.set({ "n", "v" }, "<leader>d", '"+d')
+--vim.keymap.set({ "n", "v" }, "<leader>p", '"+p')
+--vim.keymap.set({ 'n', 'v' }, '<leader>P', '"+P')
 
 -- don't lose selection when shifting text
 vim.keymap.set("x", "<", "<gv")
@@ -110,7 +110,7 @@ vim.keymap.set("x", ">", ">gv")
   --vim.keymap.set("i", "<C-b>d", ":BufferLinePickClose<CR>")
   --vim.keymap.set("n", "<C-b>d", ":BufferLinePickClose<CR>")
 
-  -- Direstories
+  -- Directories
 
 
 -- Definir función para crear carpeta con path absoluto

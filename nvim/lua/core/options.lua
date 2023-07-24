@@ -1,3 +1,6 @@
+-- set the mapleader to space
+vim.g.mapleader = " "
+
 -- indentation
 vim.opt.autoindent = true
 vim.opt.smartindent = false
@@ -5,7 +8,34 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.cmd[[filetype indent on]]
 
--- Navegación con CTRL+LEFT o CTRL+RIGHT en modo Insert
+-- CLIPBOARD
+--vim.cmd("set clipboard=unnamedplus")
+--vim.opt.clipboard:append("unnamedplus")
+
+vim.g.clipboard = {
+  name = 'WslClipboard',
+  copy = {
+    ['+'] = 'clip.exe',
+    ['*'] = 'clip.exe',
+  },
+  paste = {
+    ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+  },
+  cache_enabled = 0,
+}
+
+-- Mapear Ctrl+C para copiar texto seleccionado al portapapeles en modo visual e insert
+vim.api.nvim_set_keymap('v', '<C-c>', '"+y', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<C-c>', '<Esc>"+ybi', { noremap = true, silent = true })
+
+-- Mapear Ctrl+V para pegar desde el portapapeles en modo visual e insert
+vim.api.nvim_set_keymap('v', '<C-v>', '"+p', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<C-v>', '<C-r>+', { noremap = true, silent = true })
+
+-- Mapear Ctrl+X para cortar texto seleccionado al portapapeles en modo visual e insert
+vim.api.nvim_set_keymap('v', '<C-x>', '"+x', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<C-x>', '<Esc>"+ybd', { noremap = true, silent = true })
 
 -- reread file if it has been modified outside of Vim
 vim.opt.autoread = true
@@ -95,26 +125,13 @@ vim.cmd [[highlight clear SignColumn]]
 -- NEW SELECTING LETTER AND WORDS CONFIGRATION POR MI
 vim.opt.selection = "exclusive"
 vim.opt.keymodel = "startsel,stopsel"
-vim.opt.selection = "exclusive"
-vim.opt.keymodel = "startsel,stopsel"
 vim.opt.selectmode = "key"
-
--- CLIPBOARD
-vim.cmd("set clipboard=unnamedplus")
-
-if vim.fn.has("clipboard") then
-  vim.opt.clipboard:append("unnamedplus")
-end
-
 
 --globals
 
 -- enable filetype.lua
 vim.g.do_filetype_lua = 1
 vim.g.did_load_filetypes = 0
-
--- set the mapleader to space
-vim.g.mapleader = " "
 
 -- declare before indent-blankline is loaded
 --vim.g.indent_blankline_filetype_exclude = {

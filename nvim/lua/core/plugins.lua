@@ -1,80 +1,6 @@
 -- plugins
 return {
-  --{
-  --  "folke/noice.nvim",
-  --  dependencies = {
-  --    "MunifTanjim/nui.nvim",
-  --    "nvim-treesitter/nvim-treesitter",
-  --   "nvim-tree/nvim-web-devicons",
-  --    {
-  --     "rcarriga/nvim-notify",
-  --      keys = {
-  --        {
-  --          "<leader>un",
-  --          function()
-  --            require("notify").dismiss({ silent = true, pending = true })
-  --          end,
-  --          desc = "Delete all Notifications",
-  --        },
-  --      },
-  --      opts = {
-  --        timeout = 5000,
-  --        max_height = function()
-  --          return math.floor(vim.o.lines * 0.75)
-  --        end,
-  --       max_width = function()
-  --          return math.floor(vim.o.columns * 0.75)
-  --        end,
-  --      },
-  --    }
-  --  },
-  --  event = "VeryLazy",
-  --  opts = {
-  --    lsp = {
-  --      override = {
-  --        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-  --        ["vim.lsp.util.stylize_markdown"] = true,
-  --      }
-  --    },
-  --   presets = {
-  --      bottom_search = true,
-  --      command_palette = true,
-  --      long_message_to_split = true,
-  --    }
-  --  }
-  --},
-  
-  -- better file explorer
-  --{
-  --  "justinmk/vim-dirvish",
-  --  keys = "-",
-  --  cmd = "Dirvish",
-  --  init = function()
-  --    -- check if a file argument supplied is a directory
-  --    local argv_contains_dir = false
-  --    for k, v in pairs(vim.fn.argv()) do
-  --      if vim.fn.isdirectory(v) == 1 then
-  --        argv_contains_dir = true
-  --      end
-  --    end
-  --    if vim.fn.argc() >= 1 and argv_contains_dir then
-  --      require("lazy").load({ plugins = { "vim-dirvish" } })
-  ---    end
-  --    -- load dirvish when a directory is opened
-  --    vim.api.nvim_create_autocmd("BufNew", {
-  --      callback = function()
-  --        if require("lazy.core.config").plugins["vim-dirvish"]._.loaded then
-  --          return true
-  --        end
---
-  --        if vim.fn.isdirectory(vim.fn.expand("<afile>")) == 1 then
-  --          require("lazy").load({ plugins = { "vim-dirvish" } })
-  ----          return true
-   --       end
-   --     end,
-  --    })
-   -- end
- -- },
+  --
   -- unix helpers
   {
     "tpope/vim-eunuch",
@@ -98,22 +24,6 @@ return {
       "W",
     }
   },
-  --{ "tpope/vim-rsi", event = { "InsertEnter", "CmdlineEnter" } },
-  --{
-  --  "echasnovski/mini.move",
-  --  keys = {
-  --    "<A-h>",
-  --    "<A-j>",
-   ---   "<A-k>",
-  --    "<A-l>",
-  --    { "<A-h>", mode = "v" },
-  --    { "<A-j>", mode = "v" },
-  --    { "<A-k>", mode = "v" },
-  --    { "<A-l>", mode = "v" }
-  --  },
-  --  config = function()
-  ----  end
-  --},
   { "tpope/vim-unimpaired", keys = { "[", "]" } },
   
   -- better git integration
@@ -166,14 +76,7 @@ return {
       "GBrowse"
     }
   },
-  --{
-  --  "tpope/vim-surround",
-  --  keys = { "ds", "cs", "ys", { "sa", "<Plug>VSurround", mode = "v" }, { "gS", mode = "v" } },
-  ---  config = function()
-  --    -- remove vim-surround's visual mode mapping for S and use sa instead
-  --    vim.keymap.del("x", "S")
-  --  end
-  --},
+
   { "tpope/vim-repeat", event = "VeryLazy" },
   
   -- git commit browser
