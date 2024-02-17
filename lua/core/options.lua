@@ -13,14 +13,14 @@ vim.cmd[[filetype indent on]]
 --vim.opt.clipboard:append("unnamedplus")
 
 vim.g.clipboard = {
-  name = 'WslClipboard',
+  name = 'UbuntuClipboard',
   copy = {
-    ['+'] = 'clip.exe',
-    ['*'] = 'clip.exe',
+    ['+'] = 'xclip -selection clipboard',
+    ['*'] = 'xclip -selection clipboard',
   },
   paste = {
-    ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-    ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    ['+'] = 'xclip -selection clipboard -o',
+    ['*'] = 'xclip -selection clipboard -o',
   },
   cache_enabled = 0,
 }

@@ -24,7 +24,6 @@ configs.setup {
     "r",
     "regex",
     "sql",
-    "tsx",
     "typescript",
     "vim",
     "yaml",

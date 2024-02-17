@@ -103,15 +103,6 @@ return {
   --    show_current_context_start = true,
   --  }
   --},
-  -- zen mode
-  {
-    "folke/zen-mode.nvim",
-    keys = {
-      { "<leader>z", function() require("zen-mode").toggle() end }
-    },
-    cmd = { "ZenMode" },
-    config = true,
-  },
   -- parentheses colorizer
   {
     "junegunn/rainbow_parentheses.vim",
@@ -172,11 +163,6 @@ return {
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       "nvim-treesitter/nvim-treesitter"
-    },
-    opts = {
-      lightbulb = {
-        sign = false
-      }
     },
     keys = {
       { "gh",         "<cmd>Lspsaga lsp_finder<CR>" },
