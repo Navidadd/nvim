@@ -103,6 +103,19 @@ return {
   --    show_current_context_start = true,
   --  }
   --},
+  -- zen mode
+  
+  --GIT
+  { "NeogitOrg/neogit", dependencies = "nvim-lua/plenary.nvim", config = true },
+
+  {
+    "folke/zen-mode.nvim",
+    keys = {
+      { "<leader>z", function() require("zen-mode").toggle() end }
+    },
+    cmd = { "ZenMode" },
+    config = true,
+  },
   -- parentheses colorizer
   {
     "junegunn/rainbow_parentheses.vim",
@@ -163,6 +176,11 @@ return {
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       "nvim-treesitter/nvim-treesitter"
+    },
+    opts = {
+      lightbulb = {
+        sign = false
+      }
     },
     keys = {
       { "gh",         "<cmd>Lspsaga lsp_finder<CR>" },
@@ -231,20 +249,21 @@ return {
       },
     }
   },
-  {
-    "folke/neodev.nvim",
-    ft = "lua",
-    config = function()
-      require("neodev").setup()
-        vim.lsp.start({
-          name = "lua-language-server",
-          cmd = { "lua-language-server" },
-          before_init = require("neodev.lsp").before_init,
-          root_dir = vim.fn.getcwd(),
-          settings = { Lua = {} },
-        })
-    end
-  },
+  --{
+  --  "folke/neodev.nvim",
+  --  ft = "lua",
+  --  config = function()
+  --    require("neodev").setup()
+  --      vim.lsp.start({
+  --        name = "lua-language-server",
+  --        cmd = { "lua-language-server" },
+  --        before_init = require("neodev.lsp").before_init,
+  --        root_dir = vim.fn.getcwd(),
+  --        settings = { Lua = {} },
+  --      })
+  --  end
+  --},
+
   { "mfussenegger/nvim-jdtls", ft = "java" },
   {
     "folke/trouble.nvim",
@@ -389,21 +408,22 @@ return {
 
 
   -- COLORSCHEME
-  
-  --{
-  --  "catppuccin/nvim",
-  --  name = "catppuccin",
-  --  priority = 1000
-  --},
 
   {
-    "xero/miasma.nvim",
+    "catppuccin/nvim",
+    name = "catppuccin",
     lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd("colorscheme miasma")
-    end,
+    priority = 1000
   },
+
+  --{
+  --  "xero/miasma.nvim",
+  --  lazy = false,
+  --  priority = 1000,
+  --  config = function()
+  --    vim.cmd("colorscheme miasma")
+  --  end,
+  --},
   
   -- NEW IMPLEMENTATIONS OF PLUGINS MIO YO MISMO  
       -- Bufferline

@@ -9,41 +9,28 @@ vim.opt.expandtab = true
 vim.cmd[[filetype indent on]]
 
 -- CLIPBOARD
---vim.cmd("set clipboard=unnamedplus")
---vim.opt.clipboard:append("unnamedplus")
+  --vim.cmd("set clipboard=unnamedplus")
+  --vim.opt.clipboard:append("unnamedplus")
 
-vim.g.clipboard = {
-  name = 'UbuntuClipboard',
-  copy = {
-    ['+'] = 'xclip -selection clipboard',
-    ['*'] = 'xclip -selection clipboard',
-  },
-  paste = {
-    ['+'] = 'xclip -selection clipboard -o',
-    ['*'] = 'xclip -selection clipboard -o',
-  },
-  cache_enabled = 0,
-}
+  vim.g.clipboard = {
+    name = 'WslClipboard',
+    copy = {
+      ['+'] = 'clip.exe',
+      ['*'] = 'clip.exe',
+    },
+    paste = {
+      ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    },
+    cache_enabled = 0,
+  }
 
--- Mapear Ctrl+C para copiar texto seleccionado al portapapeles en modo visual e insert
-vim.api.nvim_set_keymap('v', '<C-c>', '"+y', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<C-c>', '<Esc>"+ybi', { noremap = true, silent = true })
-
--- Mapear Ctrl+V para pegar desde el portapapeles en modo visual e insert
-vim.api.nvim_set_keymap('v', '<C-v>', '"+p', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<C-v>', '<C-r>+', { noremap = true, silent = true })
-
--- Mapear Ctrl+X para cortar texto seleccionado al portapapeles en modo visual e insert
-vim.api.nvim_set_keymap('v', '<C-x>', '"+x', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<C-x>', '<Esc>"+ybd', { noremap = true, silent = true })
 
 -- reread file if it has been modified outside of Vim
 vim.opt.autoread = true
 -- set window background to dark
 vim.opt.background = "dark"
 
---CATPPUCCIN
--- vim.cmd([[colorscheme catppuccin]])
 
 -- more powerful backspacing
 vim.opt.backspace = "indent,eol,start"
@@ -53,7 +40,7 @@ vim.opt.backupdir = vim.fn.stdpath("state") .. "/backup"
 vim.opt.compatible = false
 vim.opt.completeopt = "menu,menuone,noselect"
 -- enable cursor line
-vim.opt.cursorline = true
+vim.opt.cursorline = true                                                                                      
 -- store all swap files in one directory
 vim.opt.directory = vim.fn.stdpath("state") .. "/swap"
 -- disable annoying error bell
@@ -197,6 +184,7 @@ end
 
 vim.api.nvim_create_user_command("Prose", prose, {})
 
+--eliminar el foquito de luz nefasto
 
 -- environment variables
 

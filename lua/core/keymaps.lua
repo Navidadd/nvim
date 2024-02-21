@@ -1,26 +1,7 @@
 -- keymaps
 
 local api = vim.api
--- delete previous word in insert mode
---vim.keymap.set("i", "<C-BS>", "<C-W>")
--- unindent in insert mode
---vim.keymap.set("i", "<S-Tab>", "<C-d>")
 
--- change directory
---vim.keymap.set('n', "<leader>cd", function()
---  vim.cmd(':cd ' .. vim.fn.expand("%:p:h"))
---  print(vim.fn.getcwd())
---end
---)
-
--- vanilla buffer switcher
--- vim.keymap.set('n', '<leader>b', ':set nomore <Bar> echo "Open buffers:" <Bar> :buffers <Bar> :set more <CR>:b<Space>')
-
-
--- TODO: write this in lua
--- find and replace on current selection
--- snippet written by Bryan Kennedy and Peter Butkovic
--- https://stackoverflow.com/a/6171215/14111707
 vim.cmd [[
 " Escape special characters in a string for exact matching.
 " This is useful to copying strings from the file to the search tool
@@ -62,77 +43,78 @@ endfunction
 vnoremap <C-r> <Esc>:%s/<c-r>=GetVisual()<cr>//g<left><left>
 ]]
 
+-- Mapear Ctrl+C para copiar texto seleccionado al portapapeles en modo visual e insert
+  vim.api.nvim_set_keymap('v', '<C-c>', '"+y', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('i', '<C-c>', '<Esc>"+ybi', { noremap = true, silent = true })
+
+  -- Mapear Ctrl+V para pegar desde el portapapeles en modo visual e insert
+  vim.api.nvim_set_keymap('v', '<C-v>', '"+p', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('i', '<C-v>', '<C-r>+', { noremap = true, silent = true })
+
+  -- Mapear Ctrl+X para cortar texto seleccionado al portapapeles en modo visual e insert
+  vim.api.nvim_set_keymap('v', '<C-x>', '"+x', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('i', '<C-x>', '<Esc>"+ybd', { noremap = true, silent = true })
 
 
--- Agregar keybinding para abrir o cerrar NvimTree con Ctrl+E
-vim.keymap.set("n", "<C-e>", ":NvimTreeToggle<CR>", { silent = true })
+--intento de navegacion optimizada
+  -- Mover el cursor hacia la derecha al final de la palabra
+  -- cuando se presiona CTRL + Flecha hacia la derecha
+  vim.api.nvim_set_keymap('i', '<C-Right>', '<Esc>ea', { noremap = true, silent = true })
+
+  -- Mover el cursor hacia la izquierda al inicio de la palabra
+  -- cuando se presiona CTRL + Flecha hacia la izquierda
+  vim.api.nvim_set_keymap('i', '<C-Left>', '<Esc>bi', { noremap = true, silent = true })
+
+  -- Configurar las combinaciones de teclas para el modo insert
+  --vim.api.nvim_set_keymap('i', '<C-S-Right>', '<C-O>w', { noremap = true })
+  --vim.api.nvim_set_keymap('i', '<C-S-Left>', '<C-O>b', { noremap = true })
+  vim.api.nvim_set_keymap('i', '<C-S-Right>', '<Esc>vea', { noremap = true })
+  vim.api.nvim_set_keymap('i', '<C-S-Left>', '<Esc>vbe', { noremap = true })
+
+-- Agregar keybinding para abrir NvimTree con Ctrl+E
+  vim.keymap.set("n", "<C-e>", ":NvimTreeToggle<CR>", { silent = true })
 
 -- switch tabs quickly
-vim.keymap.set("n", "<leader>1", "1gt<CR>")
-vim.keymap.set("n", '<leader>2', "2gt<CR>")
-vim.keymap.set("n", "<leader>3", "3gt<CR>")
-vim.keymap.set("n", '<leader>4', "4gt<CR>")
-vim.keymap.set("n", "<leader>5", "5gt<CR>")
-vim.keymap.set("n", "<leader>6", "6gt<CR>")
-vim.keymap.set("n", "<leader>7", "7gt<CR>")
-vim.keymap.set("n", "<leader>8", "8gt<CR>")
-vim.keymap.set("n", "<leader>9", "9gt<CR>")
-
--- open a tab
---vim.keymap.set("n", "<leader>t", ":tabnew<CR>")
--- close a tab
---vim.keymap.set("n", "<leader>x", ":tabclose<CR>")
-
--- Resize splits with ctrl + arrows
---vim.keymap.set("n", "<C-Up>", ":resize +2<CR>")
---vim.keymap.set("n", "<C-Down>", ":resize -2<CR>")
---vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>")
---vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>")
-
--- easier copying and pasteing into clipboard
---vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
---vim.keymap.set({ "n", "v" }, "<leader>d", '"+d')
---vim.keymap.set({ "n", "v" }, "<leader>p", '"+p')
---vim.keymap.set({ 'n', 'v' }, '<leader>P', '"+P')
+  vim.keymap.set("n", "<leader>1", "1gt<CR>")
+  vim.keymap.set("n", '<leader>2', "2gt<CR>")
+  vim.keymap.set("n", "<leader>3", "3gt<CR>")
+  vim.keymap.set("n", '<leader>4', "4gt<CR>")
+  vim.keymap.set("n", "<leader>5", "5gt<CR>")
+  vim.keymap.set("n", "<leader>6", "6gt<CR>")
+  vim.keymap.set("n", "<leader>7", "7gt<CR>")
+  vim.keymap.set("n", "<leader>8", "8gt<CR>")
+  vim.keymap.set("n", "<leader>9", "9gt<CR>")
 
 -- don't lose selection when shifting text
-vim.keymap.set("x", "<", "<gv")
-vim.keymap.set("x", ">", ">gv")
+  --vim.keymap.set("x", "<", "<gv")
+  --vim.keymap.set("x", ">", ">gv")
 
--- BUFFERS RELATED
+-- BUFFERS RELATED KEYMAPS
   vim.api.nvim_set_keymap("i", "<C-b>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true }) -- next buffer insert
   vim.api.nvim_set_keymap("n", "<C-b>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true }) -- next buffer normal
-  --vim.api.nvim_set_keymap("i", "<C-b>l", ":buffers<CR>", { noremap = true, silent = true }) -- list buffers 
-
-  -- create a new buffer
-  --vim.keymap.set("", "<C-b>n", ":enew<CR>")
-  -- delete a buffer
-  --vim.keymap.set("i", "<C-b>d", ":BufferLinePickClose<CR>")
-  --vim.keymap.set("n", "<C-b>d", ":BufferLinePickClose<CR>")
 
   -- Directories
+  function create_directory()
+    -- Obtener el path absoluto de la carpeta actual en NvimTree
+    local target_path = require'nvim-tree.lib'.get_node_at_cursor().absolute_path
 
+    -- Pedir al usuario que ingrese el nombre del directorio
+    local new_directory_name = vim.fn.input("Enter directory name: ")
+    if new_directory_name == "" then
+        print("Directory name cannot be empty.")
+        return
+    end
 
--- Definir función para crear carpeta con path absoluto
-local function CreateFolderWithAbsolutePath()
-    -- Copiar el path absoluto al portapapeles usando la tecla gy
-    api.nvim_command([[normal! gy]])
+    -- Concatenar el path absoluto con el nombre del directorio
+    local new_directory_path = target_path .. "/" .. new_directory_name
 
-    -- Pedir al usuario el nombre de la carpeta
-    local folder_name = api.nvim_call_function("input", {"Enter folder name: "})
+    -- Ejecutar el comando para crear el directorio
+    vim.cmd("Mkdir " .. new_directory_path)
 
-    -- Obtener el contenido del portapapeles (que es el path absoluto copiado previamente)
-    local clipboard_content = api.nvim_call_function("getreg", {"+"})
-
-    -- Concatenar el nombre de la carpeta al path absoluto
-    local folder_path = clipboard_content .. "/" .. folder_name
-
-    -- Crear la carpeta usando el comando mkdir
-    api.nvim_call_function("mkdir", {folder_path, "p"})
-
-    -- Imprimir mensaje de éxito
-    print("Folder '" .. folder_name .. "' created at '" .. folder_path .. "'")
+    -- Actualizar la vista de NvimTree
+    vim.cmd("NvimTreeRefresh")
 end
 
--- Mapear <leader>d a la función personalizada
-vim.keymap.set("n", "<leader>d", CreateFolderWithAbsolutePath, {noremap = true, silent = true})
+-- Asignar la función al keymap
+vim.api.nvim_set_keymap("n", "<leader>cd", ":lua create_directory()<CR>", { noremap = true, silent = true }) -- nvimtree space+cd creates directory
+

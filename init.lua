@@ -12,10 +12,13 @@ require('nvim-tree').setup()
 vim.opt.termguicolors = true
 require("bufferline").setup{}
 
---cursos related
+--cursor related
 vim.cmd [[
   let &t_ti = "\e[1 q"
   let &t_SI = "\e[5 q"
   let &t_EI = "\e[1 q"
   let &t_te = "\e[0 q"
 ]]
+
+--CATPPUCCIN
+vim.cmd("colorscheme catppuccin-mocha")
